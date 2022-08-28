@@ -1,1 +1,1 @@
-console.log('h w')
+import './defineReactive'
