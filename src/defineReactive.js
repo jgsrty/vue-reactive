@@ -22,7 +22,13 @@ export function defineReactive(data, key, val) {
       console.log(`设置了${key}的属性：${key}=${newValue}`);
       if (val === newValue) return;
       val = newValue;
-      compile(this)
+      // 更新$data
+      update(this, key, newValue);
+      compile(this); //this指向vm实例
     },
   });
+}
+
+function update(vm, k, v) {
+  vm.$data[k] = v;
 }
