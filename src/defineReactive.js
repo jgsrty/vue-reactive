@@ -5,7 +5,9 @@
  * @param {*} value: 属性值
  */
 
-function defineReactive(data, key, val) {
+import { compile } from "./compiler";
+
+export function defineReactive(data, key, val) {
   // 向obj添加一个属性
   Object.defineProperty(data, key, {
     enumerable: true, //可以被枚举（for遍历）
@@ -20,16 +22,7 @@ function defineReactive(data, key, val) {
       console.log(`设置了${key}的属性：${key}=${newValue}`);
       if (val === newValue) return;
       val = newValue;
+      compile(this)
     },
   });
 }
-
-const obj = {};
-
-defineReactive(obj, "a", 100);
-console.log(obj.a);
-obj.a = 200;
-console.log(obj.a);
-
-defineReactive(obj, "b", 1111);
-console.log(obj.b);
